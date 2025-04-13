@@ -1,0 +1,95 @@
+﻿@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+}
+
+<style>
+    .custom-card {
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+
+    .custom-card-header {
+        background-color: #007bff;
+        color: white;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        text-align: center;
+        padding: 1rem;
+    }
+
+    .custom-card-body {
+        padding: 2rem;
+    }
+
+    .custom-input {
+        border-radius: 5px;
+        margin-bottom: 1rem;
+    }
+
+    .custom-btn {
+        background-color: #007bff;
+        border-color: #007bff;
+        border-radius: 5px;
+        width: 100%;
+    }
+
+    .custom-btn:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+
+    .text-center-custom {
+        color: red;
+        margin-top: 1rem;
+    }
+</style>
+
+@using (Html.BeginForm("Register", "Login_63130307", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card custom-card">
+                    <div class="custom-card-header">
+                        <h3 class="card-title">Đăng ký</h3>
+                    </div>
+                    <div class="card-body custom-card-body">
+                        <div class="form-group">
+                            <input type="text" id="Name" name="Name" class="form-control custom-input" placeholder="Họ Tên" required />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="Username" name="Username" class="form-control custom-input" placeholder="Tài khoản" required />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="Password" name="Password" class="form-control custom-input" placeholder="Mật khẩu" required />
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="ConfirmPassword" name="ConfirmPassword" class="form-control custom-input" placeholder="Xác nhận mật khẩu" required />
+                        </div>
+                        <span style="color:red">@ViewBag.Confirm</span>
+                        <div class="form-group">
+                            <input type="email" id="Email" name="Email" class="form-control custom-input" placeholder="Email" required />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="Address" name="Address" class="form-control custom-input" placeholder="Địa chỉ" required />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="PhoneNumber" name="PhoneNumber" class="form-control custom-input" placeholder="Số điện thoại" required />
+                        </div>
+                        <div class="form-group text-center">
+                            <input type="submit" value="Đăng ký" title="Đăng ký" class="btn btn-primary custom-btn" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="text-center mt-3">
+    Bấm vào đây để @Html.ActionLink("Login", "Account_63130307", null, new { @class = "btn btn-link" })
+</div>

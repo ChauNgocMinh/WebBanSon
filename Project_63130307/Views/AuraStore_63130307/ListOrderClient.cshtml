@@ -1,0 +1,112 @@
+﻿@model IEnumerable<Project_63130307.Models.OrderEntity_63130307>
+
+@{
+    ViewBag.Title = "ListOrderClient";
+    Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+}
+<style>
+    .table th, .table td {
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    .table th {
+        background-color: #f8f9fa;
+    }
+
+    .status {
+        font-weight: bold;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+
+    .status-delivered {
+        color: #28a745;
+    }
+
+    .status-pending {
+        color: #ffc107;
+    }
+
+    .status-shipping {
+        color: #007bff;
+    }
+
+    .pest_btn {
+        background-color: #007bff;
+        color: #fff;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .pest_btn:hover {
+        background-color: #0056b3;
+    }
+
+    .card-body {
+        padding: 15px;
+        border: 1px solid #dee2e6;
+        border-top: none;
+        background-color: #f8f9fa;
+    }
+</style>
+
+<div class="container py-5">
+    <h2 class="mb-4 text-center">Danh sách đơn hàng</h2>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Ngày đặt hàng</th>
+                <th>Ngày giao hàng</th>
+                <th>Trạng thái</th>
+                <th>Tên</th>
+                <th>Địa chỉ</th>
+                <th>Email</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Orderdate)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Deliverydate)</td>
+                    <td>
+                        @if (item.Status == 1)
+                        {
+                            <span class="status status-delivered">Đã giao</span>
+                        }
+                        else if (item.Status == 0)
+                        {
+                            <span class="status status-pending">Chờ xử lý</span>
+                        }
+                        else
+                        {
+                            <span class="status status-shipping">Đang giao</span>
+                        }
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.Customer.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Customer.Address)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Customer.EmailAddress)</td>
+                    <td>
+                        <button type="button" class="pest_btn" data-toggle="collapse" data-target="#details-@item.ID" aria-expanded="false">
+                            Chi tiết
+                        </button>
+                    </td>
+                </tr>
+                <tr class="collapse" id="details-@item.ID">
+                    <td colspan="7">
+                        <div class="card-body">
+                            @Html.Action("ListOrderDetailClient", "AuraStore_63130307", new { id = item.ID })
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

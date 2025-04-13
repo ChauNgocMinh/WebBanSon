@@ -1,0 +1,9 @@
+﻿
+@model IEnumerable<Project_63130307.Models.ItemType>
+
+
+@foreach (var item in Model)
+{
+	<li><a href="@Url.Action("ProductbyType","AuraStore_63130307",new { id=item.ID})">@item.TypeName</a></li>
+}
+	

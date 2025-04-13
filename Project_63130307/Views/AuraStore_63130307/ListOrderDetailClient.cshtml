@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Project_63130307.Models.OrderDetailEntity_63130307>
+
+<div class="row">
+	<div class="col-md-12 p-0">
+		<table class="table">
+            <tr>
+                <th>
+                    Ảnh
+                </th>
+                <th>
+                    Sản phẩm
+                </th>
+                <th>
+                    Số lượng
+                </th>
+                <th>
+                    Mã Đơn
+                </th>
+                <th>
+                    Tổng giá
+                </th>
+            </tr>
+			@foreach (var item in Model)
+			{
+            <tr>
+                <td>
+                    <img class="resize-image-cart" src="~/img/Item/@Html.DisplayFor(modelItem => item.Item.Picture)" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderID)
+                </td>
+                <td>
+                    @String.Format("{0:0,0}", item.Totalprice) VNĐ
+                </td>
+            </tr>
+			}
+
+		</table>
+
+	</div>
+</div>

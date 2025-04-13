@@ -1,0 +1,142 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+}
+
+@model IEnumerable<Project_63130307.Models.Item>
+<style>
+    .card-img-top {
+        object-fit: cover;
+        height: 250px;
+        width: 100%;
+        border-radius: 8px 8px 0 0;
+    }
+
+    .card {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s, box-shadow 0.3s;
+        border-radius: 8px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+
+    .card-body {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 0 0 8px 8px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    .card-title {
+        font-size: 1.2rem;
+        color: #444;
+        margin-bottom: 10px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .card-subtitle {
+        font-size: 1.4rem;
+        color: #222;
+        font-weight: 700;
+        margin-bottom: 15px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .btn-primary {
+        background-color: #ff6f61;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s, box-shadow 0.3s;
+    }
+
+        .btn-primary:hover {
+            background-color: #ff3b2f;
+            box-shadow: 0 4px 12px rgba(255, 107, 99, 0.5);
+        }
+
+    .purcharse-price {
+        text-decoration: line-through;
+        font-size: 1rem;
+        padding-left: 10px;
+        color: #999;
+    }
+
+    .btn-secondary {
+        background-color: #d3d3d3;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s, box-shadow 0.3s;
+    }
+
+        .btn-secondary:hover {
+            background-color: #b0b0b0;
+            box-shadow: 0 4px 12px rgba(176, 176, 176, 0.5);
+        }
+
+    .text-danger {
+        font-size: 1rem;
+        color: #ff3b2f;
+        font-weight: 500;
+        margin-top: 10px;
+    }
+
+    .welcome_bakery_area h2 {
+        font-size: 2rem;
+        color: #333;
+        font-weight: 700;
+        margin-bottom: 30px;
+    }
+</style>
+<section class="welcome_bakery_area cake_feature_main py-5">
+    <div class="container">
+        <h2 class="mb-4 text-center">Danh sách sản phẩm</h2>
+        <br />
+        <div class="cake_feature_row row">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-3 col-md-4 col-6 mb-4">
+                    <div class="card h-100">
+                        <a href="@Url.Action("Detail","AuraStore_63130307", new { id = item.ID })">
+                            <img class="card-img-top resize-image" src="~/img/Item/@item.Picture" alt="@item.Name">
+                        </a>
+                        <div class="card-body d-flex flex-column">
+                            <h3 class="card-subtitle mb-2">@item.Name</h3>
+                            <div class="d-flex">
+                                <h4 class="card-title">@item.SellPrice.ToString("N0") VNĐ</h4>
+                                <h4 class="purcharse-price">@item.PurcharsePrice.Value.ToString("N0") VNĐ</h4>
+                            </div>
+                            @if (item.Quantity == 0)
+                            {
+                                <p class="text-danger">Out of Stock</p>
+                            }
+                            <div class="mt-auto">
+                                @if (item.Quantity == 0)
+                                {
+                                    <a class="btn btn-secondary disabled">Thêm vào giỏ</a>
+                                }
+                                else
+                                {
+                                    <a class="btn btn-primary" href="@Url.Action("AddtoCart","Cart_63130307", new { id = item.ID, strURL = Request.Url.ToString() })">Thêm vào giỏ</a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

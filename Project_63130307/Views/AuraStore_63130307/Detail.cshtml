@@ -1,0 +1,148 @@
+﻿@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+}
+<style>
+    .image-frame {
+        display: flex;
+        align-items: center; /* Canh chiều cao theo chiều dọc */
+        justify-content: center; /* Canh chiều rộng theo chiều ngang */
+        height: 500px; /* Điều chỉnh chiều cao của khung ảnh */
+        border: 1px solid #ddd; /* Thêm đường viền cho khung ảnh */
+        border-radius: 5px; /* Bo tròn viền khung ảnh */
+        overflow: hidden; /* Ẩn phần nằm ngoài khung */
+    }
+
+    .image-frame img {
+        height: 100%; 
+        width: auto; 
+        border: 1px solid #ddd;
+    }
+
+    .product_d_price {
+        display: flex;
+    }
+
+    .col-lg-6 {
+        flex: 1; 
+        display: flex; 
+        flex-direction: column; 
+    }
+
+    .product_details_text {
+        flex: 1; 
+        display: flex; 
+        flex-direction: column; 
+        padding: 0 20px; 
+    }
+
+    .product_details_text h4,
+    .product_details_text h5 {
+        margin-top: 0; 
+        margin-bottom: 20px;
+    }
+
+    .purcharse-price {
+        text-decoration: line-through;
+        font-size: 18px !important;
+        padding-left: 5px;
+        color: #333;
+    }
+
+    .product_details_text .quantity_box {
+        margin-bottom: 20px;
+    }
+
+    .quantity_box label {
+        font-size: 16px;
+        margin-right: 10px;
+    }
+
+    .quantity_box input {
+        width: 60px;
+        padding: 5px;
+        text-align: center;
+    }
+
+    .pink_more {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .pink_more:hover {
+        background-color: #0056b3;
+    }
+
+    .pink_more.disabled {
+        background-color: #6c757d;
+        pointer-events: none;
+    }
+
+    .nav-tabs .nav-link {
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
+        padding: 10px 15px;
+        color: #333;
+        background-color: #f8f9fa;
+        margin-right: 10px;
+    }
+
+    .nav-tabs .nav-link.active {
+        color: #007bff;
+        background-color: #fff;
+        border-color: #dee2e6 #dee2e6 #fff;
+    }
+
+    .tab-content {
+        border: 1px solid #dee2e6;
+        border-top: none;
+        padding: 20px;
+        background-color: #fff;
+    }
+
+</style>
+
+<section class="product_details_area p_100">
+    <div class="container">
+        <div class="row product_d_price">
+            <div class="image-frame col-lg-6 mb-4 mb-lg-0">
+                <img src="~/img/Item/@Model.Picture" alt="@Model.Name">
+            </div>
+            <div class="col-lg-6">
+                <div class="product_details_text">
+                    <h4>@Model.Name</h4>
+                    <h5>Giá :<span> @Model.SellPrice.ToString("N0") VNĐ</span> <span class="purcharse-price">@Model.PurcharsePrice.ToString("N0") VNĐ</span></h5> 
+                    <div class="quantity_box">
+                        <label for="quantity">Số lượng :</label>
+                        <input type="number" min="1" max="10" value="1" id="quantity">
+                    </div>
+                    @if (Model.Quantity == 0)
+                    {
+                        <a class="pink_more disabled">Add to Cart</a>
+                    }
+                    else
+                    {
+                        <a class="pink_more" href="@Url.Action("AddtoCart","Cart_63130307",new { id = Model.ID, strURL = Request.Url.ToString() })">Thêm vào giỏ</a>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="product_tab_area mt-5">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Mô tả</a>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <p>@Html.Raw(@Model.ShortTitle)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

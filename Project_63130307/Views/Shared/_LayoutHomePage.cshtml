@@ -1,0 +1,228 @@
+﻿@using Project_63130307.Models;
+@{
+	Customer acc = (Customer)Session["usr"];
+	string username = "";
+	if (Request.Cookies["usr"] != null)
+	{
+		username = Request.Cookies["usr"].Value;
+	}
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="icon" href="img/fav-icon.png" type="image/x-icon" />
+    <title>ShopBook</title>
+
+	<!-- Icon css link -->
+	<link href="~/Content/font-awesome.min.css" rel="stylesheet">
+	<link href="~/vendors/linearicons/style.css" rel="stylesheet">
+	<link href="~/vendors/flat-icon/flaticon.css" rel="stylesheet">
+	<link href="~/vendors/stroke-icon/style.css" rel="stylesheet">
+	<!-- Bootstrap -->
+	<link href="~/Content/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Rev slider css -->
+	<link href="~/vendors/revolution/css/settings.css" rel="stylesheet">
+	<link href="~/vendors/revolution/css/layers.css" rel="stylesheet">
+	<link href="~/vendors/revolution/css/navigation.css" rel="stylesheet">
+	<link href="~/vendors/animate-css/animate.css" rel="stylesheet">
+
+	<link href="~/vendors/owl-carousel/owl.carousel.min.css" rel="stylesheet">
+	<link href="~/vendors/magnifc-popup/magnific-popup.css" rel="stylesheet">
+	<link href="~/vendors/nice-select/css/nice-select.css" rel="stylesheet">
+	<link href="~/vendors/magnifc-popup/magnific-popup.css" rel="stylesheet">
+
+	<link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/$RCU1GGV/style.css" rel="stylesheet" />
+
+	<link href="~/Content/responsive.css" rel="stylesheet">
+	<script>$.removeCookie('the_cookie', { path: '/' });</script>
+</head>
+<style>
+    .logo_header {
+        background-color: #f8f9fa;
+    }
+
+    .header-logo {
+        font-family: 'Arial', sans-serif;
+        font-size: 24px;
+        font-weight: bold;
+        color: #000;
+    }
+
+    .header-logo span {
+        color: #007bff;
+    }
+
+    .btn-link {
+        color: #007bff;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .btn-link:hover {
+        color: #0056b3;
+        text-decoration: underline;
+    }
+
+    .dropdown-toggle::after {
+        display: none;
+    }
+
+    .dropdown-menu {
+        background-color: #f8f9fa;
+        border: 1px solid #e7e7e7;
+    }
+
+    .dropdown-item {
+        color: #333;
+    }
+
+    .dropdown-item:hover {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .navbar-light .navbar-brand img {
+        max-height: 50px;
+    }
+
+    .my_toggle_menu span {
+        background-color: #007bff;
+        display: block;
+        height: 2px;
+        margin: 5px 0;
+        transition: all 0.3s;
+        width: 25px;
+    }
+</style>
+<body>
+    <header class="main_header_three">
+        <div class="logo_header py-3">
+            <div class="container">
+                <div class="row justify-content-between">
+                    <p class="header-logo m-0" style="font-size: 24px; font-weight: bold;">
+                        <span style="color: #f34282;">Lipstick</span>Store
+                    </p>
+                    <div>
+                        @if (Session["usr"] == null)
+                        {
+                            <div class="btn-group ps-dropdown mr-2">
+                                <a href="@Url.Action("Login","Login_63130307")" class="btn btn-link text-dark">Đăng nhập</a>
+                            </div>
+                            <div class="btn-group ps-dropdown">
+                                <a href="@Url.Action("Register","Login_63130307")" class="btn btn-link text-dark">Đăng ký</a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="dropdown">
+                                <a class="dropdown-toggle d-flex align-items-center text-dark" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <span>Xin chào @acc.Name !</span> 
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="@Url.Action("Cart","Cart_63130307")">Giỏ Hàng</a>
+                                    <a class="dropdown-item" href="@Url.Action("ListOrderClient","AuraStore_63130307")">Đơn hàng</a>
+                                    <a class="dropdown-item" href="@Url.Action("SignOut","AuraStore_63130307")">Đăng xuất</a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="middle_menu_three bg-light">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="index.html"><img src="img/logo-2.png" alt="Logo"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="my_toggle_menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                </button>
+                @Html.Action("Menu", "AuraStore_63130307")
+            </nav>
+        </div>
+    </header>
+    <div style="min-height: 80vh">
+        @RenderBody()
+    </div>
+    <footer class="footer_area bg-dark text-white py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-6 mb-4">
+                    <aside class="f_widget f_about_widget">
+                        <h4>ShopBook</h4>
+                        <ul class="list-inline">
+                            <li class="list-inline-item"><a href="https://www.facebook.com/profile.php?id=100069036532446" class="text-white"><i class="fa fa-facebook"></i></a></li>
+                            <li class="list-inline-item"><a href="#" class="text-white"><i class="fa fa-linkedin"></i></a></li>
+                            <li class="list-inline-item"><a href="#" class="text-white"><i class="fa fa-twitter"></i></a></li>
+                            <li class="list-inline-item"><a href="#" class="text-white"><i class="fa fa-google-plus"></i></a></li>
+                        </ul>
+                    </aside>
+                </div>
+                <div class="col-lg-3 col-6 mb-4">
+                    <aside class="f_widget f_link_widget">
+                        <h4>Useful Links</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="text-white">Home</a></li>
+                            <li><a href="#" class="text-white">About</a></li>
+                            <li><a href="#" class="text-white">Services</a></li>
+                            <li><a href="#" class="text-white">Contact</a></li>
+                        </ul>
+                    </aside>
+                </div>
+                <div class="col-lg-3 col-6 mb-4">
+                    <aside class="f_widget f_link_widget">
+                        <h4>Quick Links</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="text-white">FAQ</a></li>
+                            <li><a href="#" class="text-white">Help</a></li>
+                            <li><a href="#" class="text-white">Terms</a></li>
+                            <li><a href="#" class="text-white">Privacy</a></li>
+                        </ul>
+                    </aside>
+                </div>
+                <div class="col-lg-3 col-6 mb-4">
+                    <aside class="f_widget f_contact_widget">
+                        <h4>Contact Us</h4>
+                        <p>Phone: 1900 0003</p>
+                        <p>Address: TP.Hồ Chí Minh</p>
+                        <p>Email: ShopBook@gmail.com</p>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    @Html.Action("Search", "AuraStore_63130307")
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <script src="~/Scripts/popper.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/vendors/revolution/js/jquery.themepunch.tools.min.js"></script>
+    <script src="~/vendors/revolution/js/jquery.themepunch.revolution.min.js"></script>
+    <script src="~/vendors/revolution/js/extensions/revolution.extension.actions.min.js"></script>
+    <script src="~/vendors/revolution/js/extensions/revolution.extension.video.min.js"></script>
+    <script src="~/vendors/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
+    <script src="~/vendors/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
+    <script src="~/vendors/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
+    <script src="~/vendors/owl-carousel/owl.carousel.min.js"></script>
+    <script src="~/vendors/magnifc-popup/jquery.magnific-popup.min.js"></script>
+    <script src="~/vendors/isotope/imagesloaded.pkgd.min.js"></script>
+    <script src="~/vendors/isotope/isotope.pkgd.min.js"></script>
+    <script src="~/vendors/datetime-picker/js/moment.min.js"></script>
+    <script src="~/vendors/datetime-picker/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/vendors/nice-select/js/jquery.nice-select.min.js"></script>
+    <script src="~/vendors/jquery-ui/jquery-ui.min.js"></script>
+    <script src="~/vendors/lightbox/simpleLightbox.min.js"></script>
+    <script src="~/Scripts/theme.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,136 @@
+﻿@using Project_63130307.Models
+@model List<CartEntity_63130307>
+@{
+    ViewBag.Title = "Cart_63130307";
+    Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+}
+<style>
+    .table-header {
+        background-color: #49e4fa;
+        color: white;
+    }
+
+    .resize-image-cart {
+        max-width: 100px; /* Điều chỉnh kích thước tối đa của ảnh */
+        height: auto;
+    }
+
+    .cart_quantity {
+        vertical-align: middle; /* Canh giữa nội dung trong ô */
+    }
+
+    .cart_quantity_button {
+        display: flex; /* Hiển thị theo chiều ngang */
+        align-items: center; /* Canh theo chiều dọc */
+    }
+
+    .cart_quantity_input {
+        width: 50px; /* Độ rộng của ô nhập liệu */
+        text-align: center; /* Căn giữa nội dung trong ô */
+    }
+
+    .action-col {
+        vertical-align: middle;
+    }
+
+    .action-link, .action-button {
+        padding: 5px 10px; /* Tăng khoảng cách giữa nút và nội dung */
+        margin-right: 5px; /* Khoảng cách giữa các nút */
+        border-radius: 5px; /* Bo tròn viền của nút */
+        text-decoration: none; /* Loại bỏ gạch chân */
+        transition: background-color 0.3s ease; /* Hiệu ứng khi di chuột */
+    }
+
+    .btn {
+        display: block;
+        width: 100px;
+        background-color: #49e4fa;
+        color: white;
+        margin: 5px 0;
+        border: none;
+    }
+
+</style>
+<script type="text/javascript">
+    function cong() {
+        var t = document.getElementById("quantity").value;
+        document.getElementById("quantity").value = parseInt(t) + 1;
+    }
+    function tru() {
+        var t = document.getElementById("quantity").value;
+        if (parseInt(t) > 1) {
+            document.getElementById("quantity").value = parseInt(t) - 1;
+        }
+    }
+</script>
+<section class="cart_table_area p_100">
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col" class="table-header">Ảnh</th>
+                        <th scope="col" class="table-header">Sản phẩm</th>
+                        <th scope="col" class="table-header">Giá</th>
+                        <th scope="col" class="table-header">Số lượng</th>
+                        <th scope="col" class="table-header">Tổng tiền</th>
+                        <th scope="col" class="table-header" colspan="3">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <img class="resize-image-cart" src="~/img/Item/@item.Picture" alt="">
+                            </td>
+                            @using (Html.BeginForm("EditCart", "Cart_63130307", new { @id = item.IdItem }))
+                            {
+                                <td>@item.Name</td>
+                                <td>@String.Format("{0:0,0}", item.Prices) VNĐ</td>
+                                <td class="cart_quantity">
+                                    <div class="cart_quantity_button">
+                                        <input class="cart_quantity_input" type="number" name="txtSoluong" min="1" max="10" value="@item.Quantity">
+                                    </div>
+                                </td>
+                                <td>@String.Format("{0:0,0}", item.TotalPrices) VNĐ</td>
+                                <td class="action-col">
+                                    <div class="action-buttons">
+                                        <a href="@Url.Action("Detail", "AuraStore_63130307", new { id = item.IdItem })" class="action-link btn">Chi tiết</a>
+                                        @Html.ActionLink("Xóa", "DeLeteCart", new { @id = item.IdItem }, new { @class = "action-link btn" })
+                                        <input type="submit" value="Cập nhật" class="action-button btn">
+                                    </div>
+                                </td>
+                            }
+                        </tr>
+                    }
+                    <tr>
+                        <td class="d-flex justify-content-end w-100">
+                            <form class="form-inline">
+                                <a class="pest_btn" href="@Url.Action("DeleteAll","Cart_63130307")"><span style="color:red">Xóa tất cả</span></a>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row cart_total_inner">
+            <div class="col-lg-7"></div>
+            <div class="col-lg-5">
+                <div class="cart_total_text">
+                    <div class="cart_head">Đơn hàng</div>
+                    <div class="sub_total">
+                        <h5>Số lượng <span>@ViewBag.TotalQuantity</span></h5>
+                    </div>
+                    <div class="total">
+                        <h4>Tổng tiền <span>@String.Format("{0:0,0}", ViewBag.ToTalPrice) VNĐ</span></h4>
+                    </div>
+                    <div class="cart_footer">
+                        <a class="pest_btn" href="@Url.Action("Order","Cart_63130307")">Xác nhận</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

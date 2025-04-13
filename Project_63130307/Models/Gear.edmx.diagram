@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ac0390d2421241e79b1edd459e32ef82" Name="Diagram1" ZoomLevel="112">
+        <EntityTypeShape EntityType="Project_63130307Model.Admin" Width="1.5" PointX="7.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63130307Model.Banner" Width="1.5" PointX="9.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63130307Model.Customer" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63130307Model.ItemType" Width="1.5" PointX="3.75" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63130307Model.Menu" Width="1.5" PointX="1.5" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63130307Model.Order" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63130307Model.OrderDetail" Width="1.5" PointX="8.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63130307Model.Payment" Width="1.5" PointX="5.25" PointY="8.75" IsExpanded="true" />
+        <AssociationConnector Association="Project_63130307Model.FK__Order__CustomerI__239E4DCF" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63130307Model.FK__ItemType__MenuID__182C9B23" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63130307Model.FK__OrderDeta__Order__276EDEB3" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63130307Model.FK__Payment__OrderID__2A4B4B5E" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Project_63130307Model.Item" Width="1.5" PointX="6" PointY="14.25" />
+        <AssociationConnector Association="Project_63130307Model.FK__Item__TypeID__4F7CD00D" />
+        <AssociationConnector Association="Project_63130307Model.FK__OrderDeta__ItemI__52593CB8" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

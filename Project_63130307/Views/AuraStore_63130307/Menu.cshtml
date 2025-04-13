@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Project_63130307.Models.Menu>
+@using Project_63130307.Models;
+@{
+
+    Customer acc = (Customer)Session["usr"];
+    string username = "";
+    if (Request.Cookies["usr"] != null)
+    {
+        username = Request.Cookies["usr"].Value;
+
+    }
+
+}
+
+<style>
+    .navbar-nav {
+        font-size: 16px;
+        font-weight: 500;
+        box-shadow: 0px 3px 10px 0px gray;
+    }
+
+    .navbar-nav .nav-item .nav-link {
+        color: #333;
+        transition: color 0.3s ease;
+    }
+
+    .navbar-nav .nav-item .nav-link:hover {
+        color: #007bff;
+    }
+
+    .navbar-nav .nav-item .dropdown-menu {
+        background-color: #fff;
+        border: 1px solid #e7e7e7;
+        border-radius: 0;
+        margin-top: 0;
+    }
+
+    .navbar-nav .nav-item .dropdown-menu .dropdown-item {
+        color: #333;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .navbar-nav .nav-item .dropdown-menu .dropdown-item:hover {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .search_icon .nav-link {
+        padding: 0;
+        color: #333;
+    }
+
+    .search_icon .nav-link:hover {
+        color: #007bff;
+    }
+
+    .icon-Search {
+        font-size: 18px;
+    }
+</style>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="@Url.Action("Index","AuraStore_63130307")" role="button" aria-haspopup="true" aria-expanded="false">Trang chủ</a>
+        </li>
+        @foreach (var item in Model)
+        {
+            <li class="nav-item dropdown submenu">
+                <a class="nav-link dropdown-toggle" href="#" role="button" aria-haspopup="true" aria-expanded="false">@item.Name</a>
+                <ul class="dropdown-menu">
+                    @Html.Action("ItemMenuType", "AuraStore_63130307", new { id = item.ID })
+                </ul>
+            </li>
+        }
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="@Url.Action("Contact","AuraStore_63130307")" role="button" aria-haspopup="true" aria-expanded="false">Về chúng tôi</a>
+        </li>
+        
+    </ul>
+</div>
+

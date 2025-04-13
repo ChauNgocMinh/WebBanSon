@@ -1,0 +1,86 @@
+﻿@model Project_63130307.Models.AccountClientEntity_63130307
+@{
+    ViewBag.Title = "Dangnhap";
+    Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+}
+
+<style>
+    .custom-card {
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .custom-card-header {
+        background-color: #007bff;
+        color: white;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        height: 65px;
+    }
+
+    .custom-card-header h3{
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .custom-card-body {
+        padding: 2rem;
+    }
+
+    .custom-input {
+        border-radius: 5px;
+    }
+
+    .custom-btn {
+        background-color: #007bff;
+        border-color: #007bff;
+        border-radius: 5px;
+    }
+
+    .custom-btn:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+
+    .text-center-custom {
+        color: red;
+        margin-top: 1rem;
+    }
+</style>
+
+@using (Html.BeginForm("Login", "Login_63130307", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card custom-card">
+                    <div class="text-center custom-card-header">
+                        <h3 class="card-title">Đăng Nhập</h3>
+                    </div>
+                    <div class="card-body custom-card-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="userName">Tài khoản</label>
+                                <input type="text" class="form-control custom-input" id="userName" name="userName" placeholder="Tài khoản" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="passWord">Mật Khẩu</label>
+                                <input type="password" class="form-control custom-input" id="passWord" name="passWord" placeholder="Mật Khẩu" required>
+                            </div>
+                            <div class="text-center text-center-custom">
+                                @Html.ValidationSummary(true)
+                            </div>
+                            <div class="form-group text-center">
+                                <button type="submit" class="btn btn-primary custom-btn">Đăng Nhập</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
